@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Leaflet Map</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        #map {
+            height: 100%; /* Make map full screen */
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <script>
+        // Initialize the map
+        var map = L.map('map').setView([28.6139, 77.2090], 13); // Default location (Delhi, India)
+
+        // Add OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Add a marker to the default location
+        var marker = L.marker([28.6139, 77.2090]).addTo(map);
+
+        // Function to update the marker dynamically
+        function updateMarker(lat, lng) {
+            marker.setLatLng([lat, lng]); // Update marker position
+            map.setView([lat, lng], 13); // Center the map on the new location
+        }
+
+        // Example: Simulate a new location update after 5 seconds
+        setTimeout(() => {
+            updateMarker(28.7041, 77.1025); // New location (Delhi)
+        }, 5000);
+    </script>
+</body>
+</html>
